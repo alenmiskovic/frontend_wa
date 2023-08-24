@@ -121,7 +121,7 @@
                             appointmentId: appointment._id
                         };
 
-                        console.log("Sending the following data:", data);  // Debugging line
+                        console.log("Sending the following data:", data);  
 
                         const response = await axios.post('http://localhost:3000/appointments/user-appointments', data);
                         console.log("Server response:", response.data);
@@ -138,7 +138,7 @@
                         this.errorMessage = 'Please select a trainer, gym and appointment.';
                     }
                 } catch (error) {
-                    console.error("Error response from server:", error.response ? error.response.data : 'No response data');  // Debugging line
+                    console.error("Error response from server:", error.response ? error.response.data : 'No response data');  
                     this.errorMessage = `An error occurred: ${error.message}`;
                 }
             },
