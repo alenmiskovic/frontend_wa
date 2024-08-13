@@ -17,7 +17,7 @@
     },
     methods: {
       async getRandomMessage() {
-        const response = await fetch('http://localhost:3000/api/messages/random', {
+        const response = await fetch('http://localhost:3001/api/messages/random', {
           headers: {
             'Authorization': `Bearer ${this.token}`
           }
@@ -27,7 +27,7 @@
         this.message = data.message;
       },
       async saveFavorite() {
-        await fetch('http://localhost:3000/api/messages/favorites', {
+        await fetch('http://localhost:3001/api/messages/favorites', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
