@@ -14,6 +14,7 @@
     <ul v-if="favorites.length">
       <li v-for="favorite in favorites" :key="favorite._id">
         {{ favorite.text }}
+        <button @click="deleteFavorite(favorite._id)">Delete</button> <!-- Dodan gumb za brisanje -->
       </li>
     </ul>
     <p v-else>No favorites yet.</p>
@@ -104,6 +105,29 @@ export default {
       } catch (error) {
         console.error('Greška pri dohvaćanju omiljenih poruka:', error);
       }
+    },
+    async deleteFavorite(messageId) {
+      console.log('Pokrenuta metoda deleteFavorite');
+
+      const token = localStorage.getItem('token');
+
+      try {
+        console.log('Šalje se zahtjev za brisanje omiljene poruke...');
+
+        await fetch('http://localhost:3001/api/messages/favorites', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ messageId }) // Prosljeđivanje ID-a poruke koja se briše
+        });
+
+        console.log('Poruka je uspješno obrisana iz favorita');
+        this.fetchFavorites(); // Osvježavanje popisa omiljenih poruka
+      } catch (error) {
+        console.error('Greška pri brisanju omiljene poruke:', error);
+      }
     }
   },
   created() {
@@ -118,7 +142,16 @@ export default {
 .message {
   text-align: center;
 }
-
+.message {
+  text-align: center;
+  background-image: url('https://marketplace.canva.com/EAFw77ihYd8/1/0/1600w/canva-beige-abstract-shapes-desktop-wallpaper-ZRVj2MUZRxY.jpg'); /* URL do slike na internetu */
+  background-size: cover; /* Pokriva cijelu pozadinu */
+  background-repeat: no-repeat; /* Sprječava ponavljanje slike */
+  background-position: center center; /* Centriranje slike */
+  min-height: 100vh; /* Postavlja minimalnu visinu na 100% visine prikaznog prozora */
+  width: 100%;
+  padding: 20px;
+}
 .message-window {
   border: 1px solid #ccc;
   padding: 20px;
@@ -145,5 +178,11 @@ li {
   margin: 5px 0;
   padding: 10px;
   border-radius: 5px;
+}
+
+li button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 </style>

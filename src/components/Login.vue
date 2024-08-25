@@ -63,6 +63,8 @@ export default {
 
 <style scoped>
 /* Stilovi za stranicu prijave */
+
+
 form {
   max-width: 300px;
   margin: 0 auto;
