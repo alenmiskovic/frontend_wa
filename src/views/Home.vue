@@ -7,12 +7,11 @@
 
 <script>
 import Login from '../components/Login.vue';
-import Message from '../components/Message.vue';
 
 export default {
   components: {
-    Login,
-    Message
+    Login
+  
   },
   data() {
     return {
@@ -22,7 +21,7 @@ export default {
   methods: {
     setToken(token) {
       this.token = token;
-      this.$router.push('/home'); // Navigacija na home stranicu
+       // Navigacija na home stranicu
     }
   }
 };

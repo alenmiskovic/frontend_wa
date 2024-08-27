@@ -1,5 +1,10 @@
 <template>
   <div class="message">
+    <!-- Navbar s logout gumbom -->
+    <nav>
+      <button @click="logout">Logout</button>
+    </nav>
+
     <h2>Motivational Messages</h2>
 
     <!-- Prikaz nasumične poruke -->
@@ -128,6 +133,11 @@ export default {
       } catch (error) {
         console.error('Greška pri brisanju omiljene poruke:', error);
       }
+    },
+    logout() {
+      console.log('Korisnik se odjavljuje');
+      localStorage.removeItem('token');  // Uklanjanje tokena iz localStorage
+      this.$router.push('/');  // Preusmjeravanje na početnu stranicu
     }
   },
   created() {
@@ -141,9 +151,6 @@ export default {
 <style scoped>
 .message {
   text-align: center;
-}
-.message {
-  text-align: center;
   background-image: url('https://marketplace.canva.com/EAFw77ihYd8/1/0/1600w/canva-beige-abstract-shapes-desktop-wallpaper-ZRVj2MUZRxY.jpg'); /* URL do slike na internetu */
   background-size: cover; /* Pokriva cijelu pozadinu */
   background-repeat: no-repeat; /* Sprječava ponavljanje slike */
@@ -152,6 +159,27 @@ export default {
   width: 100%;
   padding: 20px;
 }
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+nav button {
+  padding: 10px 20px;
+  background-color: #42b983;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background-color: #35495e;
+}
+
 .message-window {
   border: 1px solid #ccc;
   padding: 20px;
