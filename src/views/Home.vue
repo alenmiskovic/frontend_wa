@@ -21,7 +21,6 @@ export default {
   methods: {
     setToken(token) {
       this.token = token;
-       // Navigacija na home stranicu
     }
   }
 };

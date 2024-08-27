@@ -1,25 +1,22 @@
 <template>
   <div class="message">
-    <!-- Navbar s logout gumbom -->
     <nav>
       <button @click="logout">Logout</button>
     </nav>
 
     <h2>Motivational Messages</h2>
 
-    <!-- Prikaz nasumične poruke -->
     <div v-if="message" class="message-window">
       {{ message }}
     </div>
     <button @click="getRandomMessage">Get Random Message</button>
     <button v-if="message" @click="saveFavorite">Save to Favorites</button>
 
-    <!-- Prikaz omiljenih poruka -->
     <h3>Your Favorite Messages</h3>
     <ul v-if="favorites.length">
       <li v-for="favorite in favorites" :key="favorite._id">
         {{ favorite.text }}
-        <button @click="deleteFavorite(favorite._id)">Delete</button> <!-- Dodan gumb za brisanje -->
+        <button @click="deleteFavorite(favorite._id)">Delete</button> 
       </li>
     </ul>
     <p v-else>No favorites yet.</p>
@@ -30,15 +27,15 @@
 export default {
   data() {
     return {
-      message: '',  // Inicijalna vrijednost poruke
-      favorites: []  // Polje za omiljene poruke
+      message: '',  
+      favorites: []  
     };
   },
   methods: {
     async getRandomMessage() {
       console.log('Pokrenuta metoda getRandomMessage');
 
-      const token = localStorage.getItem('token'); // Dohvaćanje tokena iz localStorage
+      const token = localStorage.getItem('token'); 
 
       try {
         console.log('Šalje se zahtjev na backend...');
@@ -82,7 +79,7 @@ export default {
         });
 
         console.log('Poruka je uspješno spremljena');
-        this.fetchFavorites();  // Osvježavanje popisa omiljenih poruka
+        this.fetchFavorites();  
         alert('Message saved to favorites');
       } catch (error) {
         console.error('Greška pri spremanju poruke:', error);
@@ -125,25 +122,25 @@ export default {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({ messageId }) // Prosljeđivanje ID-a poruke koja se briše
+          body: JSON.stringify({ messageId }) 
         });
 
         console.log('Poruka je uspješno obrisana iz favorita');
-        this.fetchFavorites(); // Osvježavanje popisa omiljenih poruka
+        this.fetchFavorites(); 
       } catch (error) {
         console.error('Greška pri brisanju omiljene poruke:', error);
       }
     },
     logout() {
       console.log('Korisnik se odjavljuje');
-      localStorage.removeItem('token');  // Uklanjanje tokena iz localStorage
-      this.$router.push('/');  // Preusmjeravanje na početnu stranicu
+      localStorage.removeItem('token');  
+      this.$router.push('/');  
     }
   },
   created() {
     console.log('Komponenta učitana, pokreće se getRandomMessage');
     this.getRandomMessage();
-    this.fetchFavorites();  // Dohvaća omiljene poruke prilikom učitavanja komponente
+    this.fetchFavorites();  
   }
 };
 </script>
@@ -152,10 +149,10 @@ export default {
 .message {
   text-align: center;
   background-image: url('https://marketplace.canva.com/EAFw77ihYd8/1/0/1600w/canva-beige-abstract-shapes-desktop-wallpaper-ZRVj2MUZRxY.jpg'); /* URL do slike na internetu */
-  background-size: cover; /* Pokriva cijelu pozadinu */
-  background-repeat: no-repeat; /* Sprječava ponavljanje slike */
-  background-position: center center; /* Centriranje slike */
-  min-height: 100vh; /* Postavlja minimalnu visinu na 100% visine prikaznog prozora */
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center center; 
+  min-height: 100vh; 
   width: 100%;
   padding: 20px;
 }
@@ -187,7 +184,7 @@ nav button:hover {
   width: 50%;
   background-color: #f9f9f9;
   border-radius: 10px;
-  min-height: 50px;  /* Održava prostor čak i kad nema poruke */
+  min-height: 50px;  
 }
 
 button {

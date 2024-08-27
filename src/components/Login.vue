@@ -42,10 +42,8 @@ export default {
 
         const data = await response.json();
         if (response.ok) {
-          // Pohranjivanje tokena u localStorage
           localStorage.setItem('token', data.token);
           console.log('Login successful:', data);
-          // Preusmjeravanje na drugu stranicu nakon prijave
           this.$router.push('/message');
         } else {
           console.error('Login failed:', data);
@@ -62,9 +60,6 @@ export default {
 </script>
 
 <style scoped>
-/* Stilovi za stranicu prijave */
-
-
 form {
   max-width: 300px;
   margin: 0 auto;

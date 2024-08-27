@@ -11,7 +11,6 @@ export default {
 </script>
 
 <style>
-/* Stilovi za navigaciju */
 nav {
   margin-bottom: 20px;
 }
